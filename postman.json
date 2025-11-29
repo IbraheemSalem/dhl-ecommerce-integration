@@ -1,0 +1,30 @@
+{
+    "info": {
+        "name": "DHL eCommerce Integration API",
+        "_postman_id": "auto-generate",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Create Shipment",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}"
+                    }
+                ],
+                "url": {
+                    "raw": "{{base_url}}/shipments",
+                    "host": ["{{base_url}}"],
+                    "path": ["shipments"]
+                },
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n  \"shipper\": {\n    \"name\": \"Store\",\n    \"street\": \"123 St\",\n    \"city\": \"Riyadh\",\n    \"state\": \"Riyadh\",\n    \"postalCode\": \"11111\",\n    \"countryCode\": \"SA\"\n  },\n  \"recipient\": {\n    \"name\": \"Customer\",\n    \"street\": \"55 Road\",\n    \"city\": \"Dubai\",\n    \"state\": \"Dubai\",\n    \"postalCode\": \"00001\",\n    \"countryCode\": \"AE\"\n  },\n  \"items\": [\n    {\n      \"description\": \"Shoes\",\n      \"quantity\": 1,\n      \"weight\": 0.7\n    }\n  ],\n  \"serviceType\": \"EXPRESS\"\n}"
+                }
+            }
+        }
+    ]
+}
