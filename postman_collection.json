@@ -1,0 +1,224 @@
+{
+  "info": {
+    "name": "DHL eCommerce Integration API",
+    "description": "Complete API collection for DHL eCommerce Integration package",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "dhl-ecommerce-integration"
+  },
+  "item": [
+    {
+      "name": "Shipments",
+      "item": [
+        {
+          "name": "Create Shipment",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"shipper\": {\n    \"name\": \"Store ABC\",\n    \"street\": \"123 King Road\",\n    \"city\": \"Riyadh\",\n    \"state\": \"Riyadh\",\n    \"postal_code\": \"12345\",\n    \"country_code\": \"SA\",\n    \"phone\": \"0555555555\",\n    \"email\": \"store@example.com\"\n  },\n  \"recipient\": {\n    \"name\": \"Customer Name\",\n    \"street\": \"55 Queen Street\",\n    \"city\": \"Dubai\",\n    \"state\": \"Dubai\",\n    \"postal_code\": \"00000\",\n    \"country_code\": \"AE\",\n    \"phone\": \"0554444444\",\n    \"email\": \"customer@example.com\"\n  },\n  \"items\": [\n    {\n      \"description\": \"Running Shoes\",\n      \"quantity\": 1,\n      \"weight\": 0.7,\n      \"value\": 150.00,\n      \"hs_code\": \"6404.11\"\n    },\n    {\n      \"description\": \"T-Shirt\",\n      \"quantity\": 2,\n      \"weight\": 0.3,\n      \"value\": 50.00\n    }\n  ],\n  \"service_type\": \"EXPRESS\",\n  \"reference\": \"ORDER-1001\",\n  \"declared_value\": 200.00,\n  \"currency\": \"USD\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/dhl/shipments",
+              "host": ["{{base_url}}"],
+              "path": ["api", "dhl", "shipments"]
+            },
+            "description": "Create a new shipment"
+          },
+          "response": []
+        },
+        {
+          "name": "Cancel Shipment",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "disabled": true
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/dhl/shipments/{{shipment_id}}/cancel",
+              "host": ["{{base_url}}"],
+              "path": ["api", "dhl", "shipments", "{{shipment_id}}", "cancel"]
+            },
+            "description": "Cancel a shipment"
+          },
+          "response": []
+        }
+      ],
+      "description": "Shipment management endpoints"
+    },
+    {
+      "name": "Rates",
+      "item": [
+        {
+          "name": "Get Rates",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"origin\": {\n    \"name\": \"Origin\",\n    \"street\": \"123 King Road\",\n    \"city\": \"Riyadh\",\n    \"state\": \"Riyadh\",\n    \"postal_code\": \"12345\",\n    \"country_code\": \"SA\"\n  },\n  \"destination\": {\n    \"name\": \"Destination\",\n    \"street\": \"55 Queen Street\",\n    \"city\": \"Dubai\",\n    \"state\": \"Dubai\",\n    \"postal_code\": \"00000\",\n    \"country_code\": \"AE\"\n  },\n  \"weight\": 1.5,\n  \"service_type\": \"EXPRESS\",\n  \"declared_value\": 200.00,\n  \"currency\": \"USD\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/dhl/rates",
+              "host": ["{{base_url}}"],
+              "path": ["api", "dhl", "rates"]
+            },
+            "description": "Get shipping rates for a route"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Rates (Minimal)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"origin\": {\n    \"postal_code\": \"12345\",\n    \"country_code\": \"SA\"\n  },\n  \"destination\": {\n    \"postal_code\": \"00000\",\n    \"country_code\": \"AE\"\n  },\n  \"weight\": 1.5\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/dhl/rates",
+              "host": ["{{base_url}}"],
+              "path": ["api", "dhl", "rates"]
+            },
+            "description": "Get rates with minimal required fields"
+          },
+          "response": []
+        }
+      ],
+      "description": "Rate calculation endpoints"
+    },
+    {
+      "name": "Tracking",
+      "item": [
+        {
+          "name": "Track Shipment",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/dhl/track/{{tracking_number}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "dhl", "track", "{{tracking_number}}"]
+            },
+            "description": "Track a shipment by tracking number"
+          },
+          "response": []
+        }
+      ],
+      "description": "Shipment tracking endpoints"
+    },
+    {
+      "name": "Labels",
+      "item": [
+        {
+          "name": "Get Label (PDF)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/dhl/labels/{{tracking_number}}?format=pdf",
+              "host": ["{{base_url}}"],
+              "path": ["api", "dhl", "labels", "{{tracking_number}}"],
+              "query": [
+                {
+                  "key": "format",
+                  "value": "pdf",
+                  "description": "Label format: pdf or png"
+                }
+              ]
+            },
+            "description": "Download shipment label as PDF"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Label (PNG)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/dhl/labels/{{tracking_number}}?format=png",
+              "host": ["{{base_url}}"],
+              "path": ["api", "dhl", "labels", "{{tracking_number}}"],
+              "query": [
+                {
+                  "key": "format",
+                  "value": "png",
+                  "description": "Label format: pdf or png"
+                }
+              ]
+            },
+            "description": "Download shipment label as PNG"
+          },
+          "response": []
+        }
+      ],
+      "description": "Label download endpoints"
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8000",
+      "type": "string"
+    },
+    {
+      "key": "token",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "tracking_number",
+      "value": "TRACK123456789",
+      "type": "string"
+    },
+    {
+      "key": "shipment_id",
+      "value": "SHIPMENT123456789",
+      "type": "string"
+    }
+  ]
+}
+

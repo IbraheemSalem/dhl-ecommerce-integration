@@ -147,6 +147,14 @@ php artisan test
 
 ---
 
+## API Documentation
+
+For complete REST API documentation, see **[API.md](API.md)**
+
+## Usage Guide
+
+For complete usage guide, see **[USAGE.md](USAGE.md)**
+
 ## License
 
 MIT
